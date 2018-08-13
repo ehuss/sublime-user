@@ -1,0 +1,13 @@
+[
+	{"keys": ["super+shift+x"], "command": "fnord"},
+	{ "keys": ["ctrl+super+up"], "command": "switch_file", "args": {"extensions": ["cpp", "cxx", "cc", "c", "hpp", "hxx", "h", "ipp", "inl", "m", "mm"]}},
+    {"keys": ["super+q"], "command": "wrap_lines_plus"},
+    {"keys": ["super+0"], "command": "reset_font_size"},
+
+    { "keys": ["ctrl+left"], "command": "move", "args": {"by": "words", "forward": false} },
+    { "keys": ["ctrl+right"], "command": "move", "args": {"by": "words", "forward": true} },
+    { "keys": ["ctrl+shift+left"], "command": "move", "args": {"by": "words", "forward": false, "extend": true} },
+    { "keys": ["ctrl+shift+right"], "command": "move", "args": {"by": "words", "forward": true, "extend": true} },
+    { "keys": ["super+alt+i"], "command": "toggle_overwrite" },
+    { "keys": ["super+d"], "command": "eric_find_under" },
+]

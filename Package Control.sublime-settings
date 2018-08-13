@@ -1,0 +1,38 @@
+{
+	"auto_upgrade_last_run": null,
+	"bootstrapped": true,
+	"debug": true,
+	"ignore_vcs_packages": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"AdvancedNewFile",
+		"Anaconda",
+		"anaconda_rust",
+		"AutomaticPackageReloader",
+		"Better CoffeeScript",
+		"Character Table",
+		"CoffeeComplete Plus (Autocompletion)",
+		"Column Select",
+		"GitGutter",
+		"Highlight",
+		"HTML-CSS-JS Prettify",
+		"IJulia",
+		"Julia",
+		"MarkdownPreview",
+		"Package Control",
+		"PackageResourceViewer",
+		"PackagesUI",
+		"PasteRepeater",
+		"Pretty JSON",
+		"Quick File Creator",
+		"RustFormat",
+		"ScopeHunter",
+		"SideBarEnhancements",
+		"Sort Lines (Numerically)",
+		"SublimeGit",
+		"SublimeREPL"
+	]
+}

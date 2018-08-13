@@ -1,0 +1,7 @@
+[
+    {
+        "caption": "Show Build Results",
+        "command": "show_panel",
+        "args": {"panel": "output.exec"}
+    }
+]
