@@ -10,4 +10,9 @@
     { "keys": ["ctrl+shift+right"], "command": "move", "args": {"by": "words", "forward": true, "extend": true} },
     { "keys": ["super+alt+i"], "command": "toggle_overwrite" },
     { "keys": ["super+d"], "command": "eric_find_under" },
+{"keys": ["f8"], "command": "rust_message_popup", "context":
+    [
+        {"key": "selector", "operator":"equal", "operand": "source.rust"}
+    ]
+},
 ]

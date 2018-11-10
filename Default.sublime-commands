@@ -3,5 +3,9 @@
         "caption": "Show Build Results",
         "command": "show_panel",
         "args": {"panel": "output.exec"}
+    },
+    {
+        "caption": "Eric New Rust Project",
+        "command": "eric_new_rust_project"
     }
 ]

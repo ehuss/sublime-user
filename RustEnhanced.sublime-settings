@@ -1,4 +1,7 @@
 {
     "rust_message_theme": "solid",
     "tab_size": 4,
+    // "rust_phantom_style": "popup",
+    "rust_message_status_bar": true,
+    // "rust_region_style": "squiggly_underline"
 }

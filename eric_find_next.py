@@ -27,6 +27,7 @@ class EricFindUnderCommand(sublime_plugin.TextCommand):
         next = self.view.find(pattern, last.end())
         if next:
             sel.add(next)
+            self.view.show(next)
 
 # test_foo()
 # test_bar
