@@ -5,8 +5,18 @@ import sublime_plugin
 class EricDupeTestCommand(sublime_plugin.TextCommand):
 
     def run(self, edit):
+        self.view.window().show_input_panel(
+            'Enter Count', '400', self.on_done, None, None)
+
+    def on_done(self, text):
+        self.view.run_command('eric_dupe_test_complete', {'count': text})
+
+
+class EricDupeTestCompleteCommand(sublime_plugin.TextCommand):
+
+    def run(self, edit, count=''):
         fn_name = sublime.get_clipboard()
-        txt = ['#[test] fn %s%i() { %s(); }' % (fn_name, i, fn_name) for i in range(0, 400)]
+        txt = ['#[test] fn %s%i() { %s(); }' % (fn_name, i, fn_name) for i in range(0, int(count))]
         self.view.insert(edit, self.view.sel()[0].begin(), '\n'.join(txt))
 
 
