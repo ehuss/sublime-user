@@ -1,4 +1,7 @@
 [
+    // Quick create file overrides this.
+    { "keys": ["super+alt+o"], "command": "toggle_overwrite" },
+    { "keys": ["super+alt+i"], "command": "toggle_overwrite" },
 	{"keys": ["super+shift+x"], "command": "fnord"},
 	{ "keys": ["ctrl+super+up"], "command": "switch_file", "args": {"extensions": ["cpp", "cxx", "cc", "c", "hpp", "hxx", "h", "ipp", "inl", "m", "mm"]}},
     {"keys": ["super+q"], "command": "wrap_lines_plus"},
@@ -8,11 +11,15 @@
     { "keys": ["ctrl+right"], "command": "move", "args": {"by": "words", "forward": true} },
     { "keys": ["ctrl+shift+left"], "command": "move", "args": {"by": "words", "forward": false, "extend": true} },
     { "keys": ["ctrl+shift+right"], "command": "move", "args": {"by": "words", "forward": true, "extend": true} },
-    { "keys": ["super+alt+i"], "command": "toggle_overwrite" },
     { "keys": ["super+d"], "command": "eric_find_under" },
-{"keys": ["f8"], "command": "rust_message_popup", "context":
-    [
-        {"key": "selector", "operator":"equal", "operand": "source.rust"}
-    ]
-},
+    {"keys": ["f8"], "command": "rust_message_popup", "context":
+        [
+            {"key": "selector", "operator":"equal", "operand": "source.rust"}
+        ]
+    },
+    { "keys": ["super+shift+option+j"], "command": "next_modification" },
+    { "keys": ["super+shift+option+k"], "command": "prev_modification" },
+    { "keys": ["super+shift+option+z"], "command": "revert_modification" },
+    { "keys": ["super+shift+option+d"], "command": "toggle_inline_diff" },
+    // { "keys": ["super+k", "super+;"], "command": "toggle_inline_diff", "args": { "prefer_hide": true } },
 ]
