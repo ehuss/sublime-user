@@ -1,5 +1,9 @@
+import os
+import re
+import subprocess
 import sublime
 import sublime_plugin
+import webbrowser
 
 
 class EricDupeTestCommand(sublime_plugin.TextCommand):
@@ -18,6 +22,79 @@ class EricDupeTestCompleteCommand(sublime_plugin.TextCommand):
         fn_name = sublime.get_clipboard()
         txt = ['#[test] fn %s%i() { %s(); }' % (fn_name, i, fn_name) for i in range(0, int(count))]
         self.view.insert(edit, self.view.sel()[0].begin(), '\n'.join(txt))
+
+
+class EricGithubBlame(sublime_plugin.WindowCommand):
+
+    def run(self):
+        view = self.window.active_view()
+        if not view:
+            return
+        file_name = view.file_name()
+        if not file_name:
+            return
+        dirpath = os.path.dirname(file_name)
+        repo_relative_path = git(['git', 'ls-files', '--full-name', file_name], dirpath)
+
+        upstream_url = remote_url('upstream', dirpath)
+        origin_url = remote_url('origin', dirpath)
+        if not origin_url:
+            sublime.error_message('Could not determine origin URL.')
+            return
+        local_branch_name = git(['git', 'rev-parse', '--abbrev-ref', 'HEAD'], dirpath)
+        remote_branch_name = None
+        remote_base = None
+        # Check if branch exists on upstream, use that if available.
+        if upstream_url:
+            try:
+                git(['git', 'rev-parse', 'refs/remotes/upstream/%s' % (local_branch_name)], dirpath)
+                remote_branch_name = local_branch_name
+                remote_base = upstream_url
+            except subprocess.CalledProcessError:
+                pass
+        if not remote_branch_name:
+            # Check if branch is available in origin.
+            try:
+                actual_origin_branch = git(['git', 'rev-parse', '--abbrev-ref', '@{u}'], dirpath)
+                print(actual_origin_branch)
+                assert actual_origin_branch.startswith('origin/')
+                remote_branch_name = actual_origin_branch[7:]
+                remote_base = origin_url
+            except subprocess.CalledProcessError:
+                pass
+        if not remote_branch_name:
+            # Fall back to master.
+            remote_branch_name = 'master'
+            if upstream_url:
+                remote_base = upstream_url
+            else:
+                remote_base = origin_url
+
+        line = view.rowcol(view.sel()[0].begin())[0] + 1
+        blame_url = '%s/blame/%s/%s#L%i' % (remote_base, remote_branch_name, repo_relative_path, line)
+        webbrowser.open(blame_url)
+
+
+def remote_url(remote, path):
+    try:
+        url = git(['git', 'config', '--get', 'remote.%s.url' % (remote,)], path)
+    except subprocess.CalledProcessError:
+        return None
+    m = re.match(r'git@github.com:(.*?)(?:\.git)?$', url)
+    if m:
+        return 'https://github.com/%s' % (m.group(1),)
+    else:
+        m = re.match(r'(https://github.com/.*?)(?:\.git)?$', url)
+        if m:
+            return m.group(1)
+        else:
+            sublime.error('Unrecognized remote: %s' % (url,))
+            return None
+
+
+def git(command, path):
+    return subprocess.check_output(command,
+        cwd=path, universal_newlines=True).strip()
 
 
 # def print_id_vel(where, view):
