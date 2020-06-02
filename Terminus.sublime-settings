@@ -46,5 +46,14 @@
         // "14": "#00ffff",  // light_cyan
         // "15": "#ffffff"   // light_white
     },
-
+    "shell_configs": [
+        {
+            "name": "Bash",
+            "cmd": ["/usr/local/bin/bash", "-i", "-l"],
+            "env": {},
+            "enable": true,
+            "default": true,
+            "platforms": ["linux", "osx"]
+        },
+    ]
 }
