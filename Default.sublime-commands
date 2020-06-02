@@ -10,6 +10,21 @@
     },
     {
         "caption": "Eric GitHub Blame",
-        "command": "eric_github_blame"
-    }
+        "command": "eric_github_view"
+    },
+    {
+        "caption": "Eric GitHub Blame Master",
+        "command": "eric_github_view",
+        "args": {"branch": "master"}
+    },
+    {
+        "caption": "Eric GitHub Normal",
+        "command": "eric_github_view",
+        "args": {"command": "blob"}
+    },
+    {
+        "caption": "Eric GitHub Normal Master",
+        "command": "eric_github_view",
+        "args": {"command": "blob", "branch": "master"}
+    },
 ]

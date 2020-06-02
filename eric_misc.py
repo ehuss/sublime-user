@@ -24,9 +24,9 @@ class EricDupeTestCompleteCommand(sublime_plugin.TextCommand):
         self.view.insert(edit, self.view.sel()[0].begin(), '\n'.join(txt))
 
 
-class EricGithubBlame(sublime_plugin.WindowCommand):
+class EricGithubView(sublime_plugin.WindowCommand):
 
-    def run(self):
+    def run(self, command='blame', branch=None):
         view = self.window.active_view()
         if not view:
             return
@@ -56,7 +56,6 @@ class EricGithubBlame(sublime_plugin.WindowCommand):
             # Check if branch is available in origin.
             try:
                 actual_origin_branch = git(['git', 'rev-parse', '--abbrev-ref', '@{u}'], dirpath)
-                print(actual_origin_branch)
                 assert actual_origin_branch.startswith('origin/')
                 remote_branch_name = actual_origin_branch[7:]
                 remote_base = origin_url
@@ -69,10 +68,18 @@ class EricGithubBlame(sublime_plugin.WindowCommand):
                 remote_base = upstream_url
             else:
                 remote_base = origin_url
+        if branch != None:
+            # Let the caller override it.
+            remote_branch_name = branch
+            if upstream_url:
+                remote_base = upstream_url
+            else:
+                remote_base = origin_url
 
         line = view.rowcol(view.sel()[0].begin())[0] + 1
-        blame_url = '%s/blame/%s/%s#L%i' % (remote_base, remote_branch_name, repo_relative_path, line)
-        webbrowser.open(blame_url)
+        to_open = '%s/%s/%s/%s#L%i' % (remote_base, command, remote_branch_name, repo_relative_path, line)
+        print('open %r' % (to_open,))
+        webbrowser.open(to_open)
 
 
 def remote_url(remote, path):
