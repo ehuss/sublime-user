@@ -1,5 +1,5 @@
 // RustFmt Settings - User
 {
     "format_on_save": false,
-    "executable": ["rustfmt", "+nightly"],
+    "executable": ["rustfmt", "+nightly", "--edition=2018"],
 }
