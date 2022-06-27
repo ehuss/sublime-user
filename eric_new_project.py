@@ -43,4 +43,4 @@ class EricNewRustProjectCommand(sublime_plugin.WindowCommand):
             subl = subl[:subl.rfind(".app/") + 5] + 'Contents/SharedSupport/bin/subl'
         self.window.run_command('close_all')
         self.window.run_command('close_project')
-        subprocess.check_call([subl, project_path])
+        sublime.set_timeout_async(lambda: subprocess.check_call([subl, project_path]), 1000)
